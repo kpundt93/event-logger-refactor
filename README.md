@@ -18,10 +18,6 @@
 
 This project was created for Epicodus bootcamp to show proficiency in React CRUD functionality. All users may add, delete, update, view game plays. It counts total game play logs.
 
-## Database Schema
-
-![image_of_database_schema](./public/new_schema.png)
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
