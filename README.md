@@ -4,6 +4,24 @@
 
 ![Alt text](./src/images/gameDiagram.png?raw=true "Component Diagram")
 
+#### React app for logging game plays.
+
+## Technologies Used
+
+* _React library_
+* _Javascript_
+* _Node_
+* _Webpack_
+* _Babel_
+
+## Description
+
+This project was created for Epicodus bootcamp to show proficiency in React CRUD functionality. All users may add, delete, update, view game plays. It counts total game play logs.
+
+## Database Schema
+
+![image_of_database_schema](./public/new_schema.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -74,3 +92,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT) Copyright (c) 2022 Morgan Waites, Kate Kiatsiri, Katie Pundt
