@@ -1,3 +1,9 @@
+# Game Play Logger
+
+## By: Morgan Waites, Kate Kiatsiri, Katie Pundt
+
+![Alt text](./src/images/gameDiagram.png?raw=true "Component Diagram")
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
