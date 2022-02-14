@@ -5,7 +5,7 @@ import PlayEntry from './PlayEntry'
 function PlayList(props){
   return(
     <React.Fragment>
-      {props.playList.map((playEntry) =>
+      {Object.values(props.playList).map((playEntry) =>
       <PlayEntry 
         whenGameClicked = { props.onPlaySelection }  
         name= {playEntry.name} 
@@ -20,7 +20,7 @@ function PlayList(props){
 }
 
 PlayList.propTypes = {
-  playList: PropTypes.array,
+  playList: PropTypes.object,
   onPlaySelection: PropTypes.func
 }
 

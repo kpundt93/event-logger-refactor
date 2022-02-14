@@ -3,6 +3,8 @@ import NewPlayEntryForm from './NewPlayEntryForm';
 import PlayList from './PlayList';
 import PlayEntryDetail from './PlayEntryDetail';
 import EditPlayEntryForm from './EditPlayEntryForm';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class PlayControl extends React.Component {
 
@@ -10,7 +12,6 @@ class PlayControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      mainPlayList: [],
       selectedPlay: null,
       editing: false,
       counter: 0
@@ -18,32 +19,41 @@ class PlayControl extends React.Component {
   } 
   
   handleChangingSelectedPlay = (id) => {
-    const selectedPlay = this.state.mainPlayList.filter(play => play.id === id)[0];
+    const selectedPlay = this.props.mainPlayList[id];
     this.setState({selectedPlay: selectedPlay});
   }
   
   handleDeletingPlay = (id) => {
-    const newMainPlayList = this.state.mainPlayList.filter(play => play.id !== id);
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_GAME',
+      id: id
+    }
+    dispatch(action)
     this.setState({
-      mainPlayList: newMainPlayList,
       selectedPlay: null,
       counter: this.state.counter-1
     });
   }
 
   handleEditingPlayInList = (playToEdit) => {
-    const editedMainPlayList = this.state.mainPlayList
-      .filter(play => play.id !== this.state.selectedPlay.id)
-      .concat(playToEdit);
+    const { dispatch } = this.props;
+    const { id, name, players, winner } = playToEdit;
+    const action = {
+      type: 'ADD_GAME',
+      id: id,
+      name: name,
+      players: players,
+      winner: winner
+    }
+    dispatch(action);
     this.setState({
-        mainPlayList: editedMainPlayList,
-        editing: false,
-        selectedPlay: null
-      });
+      editing: false,
+      selectedPlay: null
+    });
   }
 
   handleEditClick = () => {
-    console.log("edit click working")
     this.setState({editing: true});
   }
 
@@ -61,12 +71,21 @@ class PlayControl extends React.Component {
     }
   }
 
-  handleAddingNewPlayToList = (newPlay) =>
-  {
-    const newMainPlayList = this.state.mainPlayList.concat(newPlay);
-    this.setState({mainPlayList: newMainPlayList,
-                  formVisibleOnPage: false, 
-                  counter: this.state.counter+1});
+  handleAddingNewPlayToList = (newPlay) => {
+    const { dispatch } = this.props;
+    const { id, name, players, winner } = newPlay;
+    const action = {
+      type: 'ADD_GAME',
+      id: id,
+      name: name,
+      players: players,
+      winner: winner
+    }
+    dispatch(action);
+    this.setState({
+      formVisibleOnPage: false, 
+      counter: this.state.counter+1
+    });
   }
   
   render(){
@@ -78,20 +97,17 @@ class PlayControl extends React.Component {
         playEntry = {this.state.selectedPlay} 
         onEditPlay = {this.handleEditingPlayInList} />
       buttonText = "Return to Play List";
-    }
-    else if (this.state.formVisibleOnPage) {
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewPlayEntryForm onNewPlayEntryCreation={this.handleAddingNewPlayToList}  />;
       buttonText = "Return to Game Play List";
-    }
-    else if (this.state.selectedPlay != null){
+    } else if (this.state.selectedPlay != null) {
       currentlyVisibleState = <PlayEntryDetail 
         onClickingDelete = {this.handleDeletingPlay}  
         onClickingEdit = {this.handleEditClick} 
         playEntry={this.state.selectedPlay} />
       buttonText = "Return to Game Play List";
-    }
-    else {
-      currentlyVisibleState = <PlayList playList={this.state.mainPlayList}  onPlaySelection={this.handleChangingSelectedPlay}/>
+    } else {
+      currentlyVisibleState = <PlayList playList={this.props.mainPlayList}  onPlaySelection={this.handleChangingSelectedPlay}/>
       buttonText = "Add Play"
     }
     return ( 
@@ -99,10 +115,22 @@ class PlayControl extends React.Component {
       <div style={{marginBottom:'16px'}}>Total Plays: {this.state.counter}</div>
       {currentlyVisibleState}
       
-      <button onClick={this.handleClick}>{buttonText}</button> { /* new code */ }
+      <button onClick={this.handleClick}>{buttonText}</button>
     </React.Fragment>
-  );
+    );
+  }
 }
 
+PlayControl.propTypes = {
+  mainPlayList: PropTypes.object
 }
+
+const mapStateToProps = state => {
+  return {
+    mainPlayList: state
+  }
+}
+
+PlayControl = connect(mapStateToProps)(PlayControl);
+
 export default PlayControl;
