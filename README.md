@@ -1,6 +1,6 @@
 # Game Play Logger
 
-## By: Morgan Waites, Kate Kiatsiri, Katie Pundt
+## By: Morgan Waites, Kate Kiatsiri, Katie Pundt, and Jeff Terrell
 
 ![Alt text](./src/images/gameDiagram.png?raw=true "Component Diagram")
 
@@ -91,4 +91,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT) Copyright (c) 2022 Morgan Waites, Kate Kiatsiri, Katie Pundt
+[MIT](https://opensource.org/licenses/MIT) Copyright (c) 2022 Morgan Waites, Kate Kiatsiri, Katie Pundt, Jeff Terrell
